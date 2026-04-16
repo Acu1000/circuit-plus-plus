@@ -2,6 +2,7 @@
 
 #include<global.hpp>
 #include<vector>
+#include<memory>
 #include<parts/node.hpp>
 #include<comps/component.hpp>
 
@@ -25,11 +26,18 @@ class SimulationBuilder {
 
     private:
     vector<Node> nodes;
-    RefVector<Component> components;
+    vector<unique_ptr<Component>> components;
 
     public:
     Node& create_node();
     Simulation build();
-    void add_component(Component& p_component);
+
+    template<typename T, typename... Args>
+    T& add(Args&&... args) {
+        unique_ptr<T> ptr = make_unique<T>(forward<Args>(args)...);
+        T& ref = *ptr;
+        components.push_back(move(ptr));
+        return ref;
+    }
 
 };

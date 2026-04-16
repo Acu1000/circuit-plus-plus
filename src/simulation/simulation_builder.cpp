@@ -10,16 +10,11 @@ Node& SimulationBuilder::create_node()
     return nodes.back();
 }
 
-void SimulationBuilder::add_component(Component &p_component)
-{
-    components.push_back(p_component);
-}
-
 Simulation SimulationBuilder::build() {
     Simulation sim(nodes.size());
 
-    for (Component& comp : components) {
-        comp.build(sim);
+    for (const auto& comp : components) {
+        comp->build(sim);
     }
 
     return sim;

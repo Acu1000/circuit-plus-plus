@@ -12,14 +12,10 @@ int main() {
     
     SimulationBuilder& builder = *SimulationBuilder::get();
 
-    Resistor r1(10);
-    builder.add_component(r1);
-    Resistor r2(20);
-    builder.add_component(r2);
-    Resistor r3(40);
-    builder.add_component(r3);
-    DCPower v1(10);
-    builder.add_component(v1);
+    Resistor& r1 = builder.add<Resistor>(10);
+    Resistor& r2 = builder.add<Resistor>(20);
+    Resistor& r3 = builder.add<Resistor>(40);
+    DCPower& v1 = builder.add<DCPower>(10);
 
     // v1 -- r1 -- r2
     //          |

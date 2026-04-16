@@ -20,15 +20,12 @@ int main() {
     builder.add_component(r3);
     DCPower v1(10);
     builder.add_component(v1);
-    DCPower v2(10);
-    builder.add_component(v2);
 
     // v1 -- r1 -- r2
     //          |
     //          r3
 
     v1.Plus.connect(r1.A);
-    v2.Plus.connect(r1.A);
     r1.B.connect(r2.A);
     r1.B.connect(r3.A);
 

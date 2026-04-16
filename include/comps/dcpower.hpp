@@ -8,9 +8,9 @@ class DCPower : public Component {
     real_t voltage;
 
     public:
-    Terminal& Plus = terminals[0];
-    Terminal& Minus = terminals[1];
+    const Terminal& Plus = terminals[0];
+    const Terminal& Minus = terminals[1];
 
-    DCPower(real_t p_voltage);
-    void build(Simulation& sim) override;
+    DCPower(ComponentID p_id, real_t p_voltage);
+    void build(SimulationBuilder& builder, Simulation& sim) override;
 };

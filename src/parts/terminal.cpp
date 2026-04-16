@@ -1,36 +1,18 @@
 #include<parts/terminal.hpp>
 #include<simulation/simulation_builder.hpp>
 
-Terminal::Terminal(Component& p_owner, int p_id) : owner(p_owner), id(p_id)
+Terminal::Terminal(ComponentID p_owner_id, TerminalSubID p_sub_id) : id(p_owner_id, p_sub_id)
 {
 }
 
-int Terminal::get_id() {return id;}
+TerminalID Terminal::get_id() const { return id; }
 
-Component& Terminal::get_owner()
-{
-    return owner;   
-}
+/*
+bool Terminal::has_node() { return node_id != -1; }
 
-bool Terminal::has_node() 
-{
-    return node.has_value();
-}
+int Terminal::get_node_id() { return node_id; }
 
-Node& Terminal::get_node()
-{
-    return node->get();
-}
-
-int Terminal::get_node_id()
-{
-    return get_node().get_id();
-}
-
-void Terminal::set_node(Node &p_node)
-{
-    node = p_node;
-}
+void Terminal::set_node_id(NodeID p_node_id) { node_id = p_node_id; }
 
 void Terminal::connect(Terminal& other)
 {
@@ -56,3 +38,4 @@ void Terminal::connect(Terminal& other)
         new_node.add_terminal(other);
     }
 }
+*/

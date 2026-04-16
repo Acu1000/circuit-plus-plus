@@ -1,22 +1,21 @@
 #include "parts/node.hpp"
 #include "parts/terminal.hpp"
 
-void Node::add_terminal(Terminal &p_terminal)
+Node::Node(NodeID p_id) : id(p_id)
 {
-    terminals.insert(&p_terminal);
 }
 
-bool Node::has_terminal(Terminal& p_terminal)
+void Node::add_terminal(Terminal p_terminal)
 {
-    return terminals.contains(&p_terminal);
+    terminals.insert(p_terminal);
 }
 
-void Node::remove_terminal(Terminal& p_terminal)
+bool Node::has_terminal(Terminal p_terminal)
 {
-    terminals.erase(&p_terminal);
+    return terminals.contains(p_terminal);
 }
 
-unordered_set<Terminal *> Node::get_terminals()
+void Node::remove_terminal(Terminal p_terminal)
 {
-    return terminals;
+    terminals.erase(p_terminal);
 }

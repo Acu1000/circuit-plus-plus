@@ -5,13 +5,12 @@
 
 class Resistor : public Component {
     public:
-    Terminal& A = terminals[0];
-    Terminal& B = terminals[1];
+    const Terminal& A = terminals[0];
+    const Terminal& B = terminals[1];
 
-    Resistor(real_t p_resistance);
+    Resistor(ComponentID p_id, real_t p_resistance);
 
-    real_t get_conductance(int=0, int=0) override;
-    void build(Simulation& sim) override;
+    void build(SimulationBuilder& builder, Simulation& sim) override;
 
     private:
     real_t resistance;

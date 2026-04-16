@@ -2,23 +2,23 @@
 
 #include<global.hpp>
 
-class Node;
-class Component;
-
 class Terminal {
     private:
-    NullableRef<Node> node;
-    Component& owner;
-    int id;
+    TerminalID id;
 
     public:
-    Terminal(Component& p_owner, int p_id);
+    Terminal(ComponentID p_owner_id, TerminalSubID p_id);
 
-    int get_id();
-    Component& get_owner();
-    bool has_node();
-    Node& get_node();
-    int get_node_id();
-    void set_node(Node& p_node);
-    void connect(Terminal& other);
+    TerminalID get_id() const;
+
+    bool operator==(const Terminal& other) const {
+        return id == other.get_id();
+    }
+};
+
+template<>
+struct std::hash<Terminal>{
+    size_t operator()(const Terminal& p) const {
+        return std::hash<TerminalID>{}(p.get_id());
+    }
 };

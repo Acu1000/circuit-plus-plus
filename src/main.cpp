@@ -21,9 +21,9 @@ int main() {
     //          |
     //          r3
 
-    v1.Plus.connect(r1.A);
-    r1.B.connect(r2.A);
-    r1.B.connect(r3.A);
+    builder.connect(v1.Plus, r1.A);
+    builder.connect(r1.B, r2.A);
+    builder.connect(r1.B, r3.A);
 
     Simulation sim = builder.build();
 

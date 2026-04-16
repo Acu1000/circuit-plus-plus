@@ -5,16 +5,16 @@
 #include<array>
 
 class Simulation;
+class SimulationBuilder;
 
 class Component {
     protected:
+    ComponentID id;
     int terminal_count;
     vector<Terminal> terminals;
 
-    Component(int p_terminal_count=2);
+    Component(ComponentID id, int p_terminal_count=2);
 
     public:
-    virtual real_t get_conductance(int, int) {return 0;}
-    vector<Terminal*> get_terminals();
-    virtual void build(Simulation&) {};
+    virtual void build(SimulationBuilder&, Simulation&) {};
 };

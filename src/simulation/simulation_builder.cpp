@@ -1,8 +1,6 @@
 #include<simulation/simulation_builder.hpp>
 #include<simulation/simulation.hpp>
 
-SimulationBuilder* SimulationBuilder::instance = nullptr;
-
 SimulationBuilder::SimulationBuilder() {
     
 }

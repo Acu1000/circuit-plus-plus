@@ -6,7 +6,7 @@ The project is currently work in progress.
 
 # Example code
 ```cpp
-SimulationBuilder& builder = *SimulationBuilder::get();
+SimulationBuilder builder;
 
 Resistor& r1 = builder.add<Resistor>(10);
 Resistor& r2 = builder.add<Resistor>(20);

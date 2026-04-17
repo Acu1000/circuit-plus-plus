@@ -10,7 +10,7 @@ int main() {
 
     cout << "===================\nSTARTING\n===================\n";
     
-    SimulationBuilder& builder = *SimulationBuilder::get();
+    SimulationBuilder builder;
 
     Resistor& r1 = builder.add<Resistor>(10);
     Resistor& r2 = builder.add<Resistor>(20);

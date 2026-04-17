@@ -7,7 +7,7 @@
 
 class Node {
     private:
-    unordered_set<Terminal> terminals;
+    std::unordered_set<Terminal> terminals;
     NodeID id;
 
     public:

@@ -31,7 +31,7 @@ bool SimulationBuilder::is_terminal_connected(TerminalID p_terminal)
 NodeID SimulationBuilder::get_terminal_node(TerminalID p_terminal)
 {
     if (!is_terminal_connected(p_terminal)) {
-        cerr << "ERROR: attempted to get unconnected terminal node\n";
+        std::cerr << "ERROR: attempted to get unconnected terminal node\n";
         exit(1);
     }
     return terminal_connections.at(p_terminal);
@@ -49,7 +49,7 @@ void SimulationBuilder::connect(Terminal p_t1, Terminal p_t2)
 
     if (is_terminal_connected(t1id) && is_terminal_connected(t2id)) {
         // TODO: implement node merging
-        cerr << "NOT IMPLEMENTED: both terminals already have nodes\n";
+        std::cerr << "NOT IMPLEMENTED: both terminals already have nodes\n";
         exit(1);
     }
     else if (is_terminal_connected(t1id)) {

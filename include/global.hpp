@@ -5,15 +5,13 @@
 #include<functional>
 #include<vector>
 
-using namespace std;
-
 typedef double real_t;
 
 typedef int ComponentID;
 typedef int TerminalSubID;
 typedef int NodeID;
 
-typedef pair<const ComponentID, const TerminalSubID> TerminalID;
+typedef std::pair<const ComponentID, const TerminalSubID> TerminalID;
 
 template<>
 struct std::hash<TerminalID>{
@@ -24,6 +22,3 @@ struct std::hash<TerminalID>{
         return left ^ (right << 1);
     }
 };
-
-template<typename T>
-using NullableRef = std::optional<std::reference_wrapper<T>>;

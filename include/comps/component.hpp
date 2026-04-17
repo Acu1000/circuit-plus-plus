@@ -11,7 +11,7 @@ class Component {
     protected:
     ComponentID id;
     int terminal_count;
-    vector<Terminal> terminals;
+    std::vector<Terminal> terminals;
 
     Component(ComponentID id, int p_terminal_count=2);
 

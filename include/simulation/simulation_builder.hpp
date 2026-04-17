@@ -10,9 +10,9 @@
 // Singleton
 class SimulationBuilder {
     private:
-    vector<Node> nodes;
-    vector<unique_ptr<Component>> components;
-    unordered_map<TerminalID, NodeID> terminal_connections;
+    std::vector<Node> nodes;
+    std::vector<std::unique_ptr<Component>> components;
+    std::unordered_map<TerminalID, NodeID> terminal_connections;
     NodeID create_node();
     
     public:
@@ -22,9 +22,9 @@ class SimulationBuilder {
     template<typename TComponent, typename... Args>
     TComponent& add(Args&&... args) {
         ComponentID id = components.size();
-        unique_ptr<TComponent> ptr = make_unique<TComponent>(id, forward<Args>(args)...);
+        std::unique_ptr<TComponent> ptr = std::make_unique<TComponent>(id, std::forward<Args>(args)...);
         TComponent& ref = *ptr;
-        components.push_back(move(ptr));
+        components.push_back(std::move(ptr));
         return ref;
     }
     

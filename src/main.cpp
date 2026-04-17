@@ -8,7 +8,7 @@
 
 int main() {
 
-    cout << "===================\nSTARTING\n===================\n";
+    std::cout << "===================\nSTARTING\n===================\n";
     
     SimulationBuilder builder;
 

@@ -16,5 +16,5 @@ class Component {
     Component(ComponentID id, int p_terminal_count=2);
 
     public:
-    virtual void build(Circuit&, MNAEquation&) {};
+    virtual void build(Circuit& p_circuit, MNAEquation& p_equation) {};
 };

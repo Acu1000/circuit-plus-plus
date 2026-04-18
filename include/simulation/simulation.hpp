@@ -11,12 +11,17 @@ class Simulation {
     private:
         std::unique_ptr<Circuit> circuit;
         std::unique_ptr<MNAEquation> equation;
+        bool is_built = false;
 
     public:
         Simulation();
 
         template<typename TComponent, typename... Args>
-        TComponent& add(Args&&... args) { return circuit->add<TComponent>(std::forward<Args>(args)...); }
+        TComponent& add(Args&&... args) { 
+            if (is_built) throw std::runtime_error("Attempted to modify circuit post-build");
+            
+            return circuit->add<TComponent>(std::forward<Args>(args)...); 
+        }
         void connect(const Terminal& p_t1, const Terminal& p_t2);
 
         void build();

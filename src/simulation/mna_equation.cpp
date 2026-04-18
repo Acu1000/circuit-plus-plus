@@ -74,7 +74,12 @@ VectorX MNAEquation::solve()
         exit(EXIT_FAILURE);
     }
 
-    VectorX x = GBCD.colPivHouseholderQr().solve(IE);
+    solution = GBCD.colPivHouseholderQr().solve(IE);
 
-    return x;
+    return solution;
+}
+
+real_t MNAEquation::get_node_voltage(int p_node_id)
+{
+    return solution[p_node_id];
 }

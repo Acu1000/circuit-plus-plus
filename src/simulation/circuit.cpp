@@ -60,3 +60,7 @@ void Circuit::connect(const Terminal& p_t1, const Terminal& p_t2)
         set_terminal_node(t2id, new_node);
     }
 }
+std::vector<std::unique_ptr<Component>>& Circuit::get_components()
+{
+    return components;
+}

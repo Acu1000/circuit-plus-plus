@@ -21,6 +21,9 @@ class MNAEquation {
         // Source voltage vector
         VectorX E;
 
+        // Equation solution
+        VectorX solution;
+
     public:
         MNAEquation(int p_node_count);
 
@@ -33,4 +36,6 @@ class MNAEquation {
         void set_source_voltage(int p_source_id, real_t p_voltage);
 
         VectorX solve();
+        VectorX get_last_solution();
+        real_t get_node_voltage(int p_node_id);
 };

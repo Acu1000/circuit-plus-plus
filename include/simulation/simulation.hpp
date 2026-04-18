@@ -21,5 +21,5 @@ class Simulation {
 
         void build();
 
-        void simulate();
+        void step();
 };

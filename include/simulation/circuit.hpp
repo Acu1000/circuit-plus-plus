@@ -30,6 +30,7 @@ class Circuit {
         int get_node_count();
 
         void build(MNAEquation& p_sim);
+        std::vector<std::unique_ptr<Component>>& get_components();
 
         bool is_terminal_connected(TerminalID p_terminal);
         NodeID get_terminal_node(TerminalID p_terminal);

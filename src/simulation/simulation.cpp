@@ -15,10 +15,15 @@ void Simulation::build() {
     circuit->build(*equation);
 }
 
-void Simulation::simulate()
+void Simulation::step()
 {
     VectorX x = equation->solve();
 
+    for (auto& comp : circuit->get_components()) {
+        comp->update(*circuit, *equation);
+    }
+
+    /*
     int n = equation->get_node_count();
     int m = equation->get_voltage_source_count();
 
@@ -28,4 +33,5 @@ void Simulation::simulate()
     for (int i=0; i<m; i++) {
         std::cout << "Source " << i << " current: " << x[i+n] << "A\n";
     }
+    */
 }

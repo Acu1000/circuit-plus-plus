@@ -8,9 +8,8 @@ project(
 
 include_dirs = include_directories('include')
 
-exe = executable(
+lib = library(
   'circuitsim',
-  'src/main.cpp',
   'src/comps/component.cpp',
   'src/comps/resistor.cpp',
   'src/comps/dcpower.cpp',
@@ -20,6 +19,26 @@ exe = executable(
   'src/simulation/simulation.cpp',
   'src/simulation/mna_equation.cpp',
   'src/simulation/circuit.cpp',
+  include_directories : include_dirs
+)
+
+demo_exe = executable(
+  'circuitsim_demo',
+  'demos/main.cpp',
+  link_with: lib,
   install : true,
   include_directories : include_dirs
 )
+
+
+gtest_dep = dependency('gtest', main: true)
+
+test_exe = executable(
+  'circuitsim_tests',
+  'tests/tests.cpp',
+  link_with: lib,
+  dependencies: gtest_dep,
+  include_directories : include_dirs
+)
+
+test('basic_tests', test_exe)

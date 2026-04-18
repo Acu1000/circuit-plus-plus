@@ -12,5 +12,5 @@ class DCPower : public Component {
     const Terminal& Minus = terminals[1];
 
     DCPower(ComponentID p_id, real_t p_voltage);
-    void build(SimulationBuilder& builder, Simulation& sim) override;
+    void build(Circuit& builder, MNAEquation& sim) override;
 };

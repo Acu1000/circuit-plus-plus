@@ -10,7 +10,7 @@ class Resistor : public Component {
 
     Resistor(ComponentID p_id, real_t p_resistance);
 
-    void build(SimulationBuilder& builder, Simulation& sim) override;
+    void build(Circuit& builder, MNAEquation& sim) override;
 
     private:
     real_t resistance;

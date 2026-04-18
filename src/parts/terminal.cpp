@@ -1,5 +1,4 @@
 #include<parts/terminal.hpp>
-#include<simulation/simulation_builder.hpp>
 
 Terminal::Terminal(ComponentID p_owner_id, TerminalSubID p_sub_id) : id(p_owner_id, p_sub_id)
 {

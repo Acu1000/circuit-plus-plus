@@ -1,11 +1,13 @@
-#include<simulation/simulation_builder.hpp>
-#include<simulation/simulation.hpp>
+#include<simulation/circuit.hpp>
 
-SimulationBuilder::SimulationBuilder() {
-    
+void Circuit::build(MNAEquation& p_equation)
+{
+    for (auto& comp : components) {
+        comp->build(*this, p_equation);
+    }
 }
 
-NodeID SimulationBuilder::create_node()
+NodeID Circuit::create_node()
 {
     NodeID id = nodes.size();
     Node new_node(id);
@@ -13,22 +15,14 @@ NodeID SimulationBuilder::create_node()
     return id;
 }
 
-Simulation SimulationBuilder::build() {
-    Simulation sim(nodes.size());
+int Circuit::get_node_count() { return nodes.size(); }
 
-    for (const auto& comp : components) {
-        comp->build(*this, sim);
-    }
-
-    return sim;
-}
-
-bool SimulationBuilder::is_terminal_connected(TerminalID p_terminal)
+bool Circuit::is_terminal_connected(TerminalID p_terminal) 
 {
     return terminal_connections.contains(p_terminal);
 }
 
-NodeID SimulationBuilder::get_terminal_node(TerminalID p_terminal)
+NodeID Circuit::get_terminal_node(TerminalID p_terminal)
 {
     if (!is_terminal_connected(p_terminal)) {
         std::cerr << "ERROR: attempted to get unconnected terminal node\n";
@@ -37,12 +31,12 @@ NodeID SimulationBuilder::get_terminal_node(TerminalID p_terminal)
     return terminal_connections.at(p_terminal);
 }
 
-void SimulationBuilder::set_terminal_node(TerminalID p_terminal, NodeID p_node)
+void Circuit::set_terminal_node(TerminalID p_terminal, NodeID p_node)
 {
     terminal_connections.insert({p_terminal, p_node});
 }
 
-void SimulationBuilder::connect(Terminal p_t1, Terminal p_t2)
+void Circuit::connect(const Terminal& p_t1, const Terminal& p_t2)
 {
     TerminalID t1id = p_t1.get_id();
     TerminalID t2id = p_t2.get_id();
@@ -66,4 +60,3 @@ void SimulationBuilder::connect(Terminal p_t1, Terminal p_t2)
         set_terminal_node(t2id, new_node);
     }
 }
-

@@ -16,8 +16,9 @@ exe = executable(
   'src/comps/dcpower.cpp',
   'src/parts/node.cpp',
   'src/parts/terminal.cpp',
-  'src/simulation/simulation_builder.cpp',
   'src/simulation/simulation.cpp',
+  'src/simulation/mna_equation.cpp',
+  'src/simulation/circuit.cpp',
   install : true,
   include_directories : include_dirs
 )

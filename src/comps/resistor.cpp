@@ -1,13 +1,12 @@
 #include<comps/resistor.hpp>
 #include<simulation/simulation.hpp>
-#include<simulation/simulation_builder.hpp>
 #include<parts/node.hpp>
 
 Resistor::Resistor(ComponentID p_id, real_t p_resistance) : Component(p_id), resistance(p_resistance)  {
     
 }
 
-void Resistor::build(SimulationBuilder& builder, Simulation& sim)
+void Resistor::build(Circuit& builder, MNAEquation& sim)
 {
     if (builder.is_terminal_connected(A.get_id())) {
         NodeID node_a_id = builder.get_terminal_node(A.get_id());

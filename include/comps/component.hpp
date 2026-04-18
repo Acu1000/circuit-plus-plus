@@ -4,8 +4,8 @@
 #include<parts/terminal.hpp>
 #include<array>
 
-class Simulation;
-class SimulationBuilder;
+class MNAEquation;
+class Circuit;
 
 class Component {
     protected:
@@ -16,5 +16,5 @@ class Component {
     Component(ComponentID id, int p_terminal_count=2);
 
     public:
-    virtual void build(SimulationBuilder&, Simulation&) {};
+    virtual void build(Circuit&, MNAEquation&) {};
 };

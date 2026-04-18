@@ -1,10 +1,9 @@
 #include<comps/dcpower.hpp>
 #include<simulation/simulation.hpp>
-#include<simulation/simulation_builder.hpp>
 
 DCPower::DCPower(ComponentID p_id, real_t p_voltage) : Component(p_id), voltage(p_voltage) {}
 
-void DCPower::build(SimulationBuilder& builder, Simulation &sim)
+void DCPower::build(Circuit& builder, MNAEquation &sim)
 {
     if (builder.is_terminal_connected(Plus.get_id()) || builder.is_terminal_connected(Minus.get_id())) {
         int id = sim.add_voltage_source();

@@ -10,6 +10,10 @@ void Simulation::connect(const Terminal& p_t1, const Terminal& p_t2) {
     circuit->connect(p_t1, p_t2);
 }
 
+void Simulation::set_timestep(real_t p_dt) {
+    dt = p_dt;
+}
+
 void Simulation::build() {
     equation = std::make_unique<MNAEquation>(circuit->get_node_count());
     for (auto& comp : circuit->get_components()) {
@@ -25,7 +29,7 @@ void Simulation::step()
     VectorX x = equation->solve();
 
     for (auto& comp : circuit->get_components()) {
-        comp->update(*circuit, *equation);
+        comp->update(*circuit, *equation, dt);
     }
 
     /*

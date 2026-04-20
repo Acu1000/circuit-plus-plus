@@ -13,6 +13,8 @@ class Simulation {
         std::unique_ptr<MNAEquation> equation;
         bool is_built = false;
 
+        real_t dt = 5e-6;
+
     public:
         Simulation();
 
@@ -24,6 +26,7 @@ class Simulation {
         }
         void connect(const Terminal& p_t1, const Terminal& p_t2);
 
+        void set_timestep(real_t p_dt);
         void build();
 
         void step();

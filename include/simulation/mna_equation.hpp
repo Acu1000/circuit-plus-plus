@@ -10,14 +10,14 @@ class MNAEquation {
         int node_count=0;
         int voltage_source_count=0;
         
-        // Conductance matrix
-        MatrixX G;
+        // Conductance matrix components
+        MatrixX static_G, dynamic_G;
         // Connection matrices
         MatrixX B, C; 
         // Dependent source matrix
         MatrixX D;
-        // Injected current vector
-        VectorX I;
+        // Injected current vector components
+        VectorX static_I, dynamic_I;
         // Source voltage vector
         VectorX E;
 
@@ -30,7 +30,9 @@ class MNAEquation {
         int get_node_count();
         int get_voltage_source_count();
 
-        void add_base_conductance(int p_node_id1, int p_node_id2, real_t p_conductance);
+        void add_static_conductance(int p_node_id1, int p_node_id2, real_t p_conductance);
+        void add_dynamic_current(int p_node_id, real_t p_current);
+
         int add_voltage_source();
         void set_connection(int p_node_id, int p_source_id, int p_value);
         void set_source_voltage(int p_source_id, real_t p_voltage);

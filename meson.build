@@ -13,6 +13,7 @@ lib = library(
   'src/comps/component.cpp',
   'src/comps/resistor.cpp',
   'src/comps/dcpower.cpp',
+  'src/comps/acpower.cpp',
   'src/comps/voltmeter.cpp',
   'src/comps/ammeter.cpp',
   'src/parts/node.cpp',

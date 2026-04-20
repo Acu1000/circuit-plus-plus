@@ -17,7 +17,7 @@ class Component {
 
     public:
     virtual void build(Circuit&, MNAEquation&) {};
-    virtual void update(Circuit&, MNAEquation&) {};
+    virtual void update(Circuit&, MNAEquation&, real_t) {};
 
     Component(const Component&) = delete;
     Component& operator=(const Component&) = delete;

@@ -14,5 +14,5 @@ class Voltmeter : public Component {
         Voltmeter(ComponentID p_id);
         real_t measure();
 
-        void update(Circuit& p_circuit, MNAEquation& p_equation) override;
+        void update(Circuit& p_circuit, MNAEquation& p_equation, real_t dt) override;
 };

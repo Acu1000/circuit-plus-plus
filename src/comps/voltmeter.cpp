@@ -11,7 +11,7 @@ real_t Voltmeter::measure()
     return last_voltage;
 }
 
-void Voltmeter::update(Circuit &p_circuit, MNAEquation &p_equation)
+void Voltmeter::update(Circuit &p_circuit, MNAEquation &p_equation, real_t)
 {
     double plus_voltage = 0;
     double minus_voltage = 0;

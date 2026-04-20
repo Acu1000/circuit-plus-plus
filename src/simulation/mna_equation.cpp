@@ -2,11 +2,13 @@
 
 MNAEquation::MNAEquation(int p_node_count) :
     node_count(p_node_count),
-    G(MatrixX::Zero(p_node_count, p_node_count)),
+    static_G(MatrixX::Zero(p_node_count, p_node_count)),
+    dynamic_G(MatrixX::Zero(p_node_count, p_node_count)),
     B(MatrixX::Zero(p_node_count, 0)),
     C(MatrixX::Zero(0, p_node_count)),
     D(MatrixX::Zero(0, 0)),
-    I(VectorX::Zero(p_node_count)),
+    static_I(VectorX::Zero(p_node_count)),
+    dynamic_I(VectorX::Zero(p_node_count)),
     E(VectorX::Zero(0))
 {
 }
@@ -14,9 +16,9 @@ MNAEquation::MNAEquation(int p_node_count) :
 int MNAEquation::get_node_count() { return node_count; }
 int MNAEquation::get_voltage_source_count() { return voltage_source_count; }
 
-void MNAEquation::add_base_conductance(int p_node_id1, int p_node_id2, real_t p_conductance)
+void MNAEquation::add_static_conductance(int p_node_id1, int p_node_id2, real_t p_conductance)
 {
-    G(p_node_id1, p_node_id2) += p_conductance;
+    static_G(p_node_id1, p_node_id2) += p_conductance;
 }
 
 int MNAEquation::add_voltage_source()
@@ -42,6 +44,11 @@ int MNAEquation::add_voltage_source()
     return voltage_source_count-1;
 }
 
+void MNAEquation::add_dynamic_current(int p_node_id, real_t p_current) {
+    dynamic_I[p_node_id] += p_current;
+}
+
+
 void MNAEquation::set_connection(int p_node_id, int p_source_id, int p_value)
 {   
     B(p_node_id, p_source_id) = p_value;
@@ -57,6 +64,9 @@ VectorX MNAEquation::solve()
 {
     // |G B| |v|   |I|
     // |C D| |i| = |E|
+
+    MatrixX G = static_G + dynamic_G;
+    VectorX I = static_I + dynamic_I;
 
     MatrixX GBCD;
     GBCD.resize(node_count+voltage_source_count, node_count+voltage_source_count);
@@ -74,6 +84,9 @@ VectorX MNAEquation::solve()
     }
 
     solution = GBCD.colPivHouseholderQr().solve(IE);
+
+    dynamic_G.setZero();
+    dynamic_I.setZero();
 
     return solution;
 }

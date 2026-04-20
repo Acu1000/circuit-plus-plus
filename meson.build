@@ -32,6 +32,7 @@ demo_exe = executable(
   'demos/main.cpp',
   link_with: lib,
   install : true,
+  dependencies: eigen_dep,
   include_directories : include_dirs
 )
 
@@ -42,7 +43,7 @@ test_exe = executable(
   'circuitsim_tests',
   'tests/resistor_tests.cpp',
   link_with: lib,
-  dependencies: gtest_dep,
+  dependencies: [gtest_dep, eigen_dep],
   include_directories : include_dirs
 )
 

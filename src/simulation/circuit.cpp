@@ -1,12 +1,5 @@
 #include<simulation/circuit.hpp>
 
-void Circuit::build(MNAEquation& p_equation)
-{
-    for (auto& comp : components) {
-        comp->build(*this, p_equation);
-    }
-}
-
 NodeID Circuit::create_node()
 {
     NodeID id = nodes.size();

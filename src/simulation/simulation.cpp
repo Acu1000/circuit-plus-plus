@@ -12,7 +12,9 @@ void Simulation::connect(const Terminal& p_t1, const Terminal& p_t2) {
 
 void Simulation::build() {
     equation = std::make_unique<MNAEquation>(circuit->get_node_count());
-    circuit->build(*equation);
+    for (auto& comp : circuit->get_components()) {
+        comp->build(*circuit, *equation);
+    }
     is_built = true;
 }
 

@@ -8,6 +8,8 @@ project(
 
 include_dirs = include_directories('include')
 
+eigen_dep = dependency('eigen3')
+
 lib = library(
   'circuitsim',
   'src/comps/component.cpp',
@@ -21,6 +23,7 @@ lib = library(
   'src/simulation/simulation.cpp',
   'src/simulation/mna_equation.cpp',
   'src/simulation/circuit.cpp',
+  dependencies : eigen_dep,
   include_directories : include_dirs
 )
 

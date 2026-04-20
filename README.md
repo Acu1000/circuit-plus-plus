@@ -5,29 +5,28 @@ Building circuits is done in code and results are printed to the console.
 The project is currently work in progress.
 
 # Example code
+The following code uses the library to demonstrate [Ohm's law](https://en.wikipedia.org/wiki/Ohm%27s_law) 
+by creating a simple circuit with a DC voltage source, resistor and ammeter.
 ```cpp
+std::cout << "# Running: Ohm's Law Demo\n";
 Simulation sim;
 
-Resistor& r1 = sim.add<Resistor>(10);
-Resistor& r2 = sim.add<Resistor>(20);
-Resistor& r3 = sim.add<Resistor>(40);
-DCPower& v1 = sim.add<DCPower>(10);
-Voltmeter& vm = sim.add<Voltmeter>(); 
+double V = 10.0;  // Voltage
+double R = 5.0;   // Resistance
 
-//     ,-vm-,
-// v1 -- r1 -- r2
-//          |
-//          r3
+DCPower& v1 = sim.add<DCPower>(V);    // Add DC voltage source v1
+Resistor& r1 = sim.add<Resistor>(R);  // Add resistor r1
+Ammeter& A1 = sim.add<Ammeter>();     // Add ammeter A1
 
-sim.connect(v1.Plus, r1.A);
-sim.connect(r1.B, r2.A);
-sim.connect(r1.B, r3.A);
-sim.connect(vm.Plus, r1.A);
-sim.connect(vm.Minus, r1.B);
+// v1 -- r1 -- A1
 
-sim.build();
+// Connect the 3 components in series
+sim.connect(v1.Plus, r1.A);  // Connect v1 to r1
+sim.connect(r1.B, A1.Plus);  // Connect r1 to A1
 
-sim.step();
+sim.build();  // Build the simulation
+sim.step();   // Run the simulation for a single time step
 
-std::cout << "Voltage at r1: " << vm.measure() << "V\n";
+// We read the current from A1 and realize that I = V / R
+std::cout << "V = " << V << "V,  R = " << R << "Ω,  I = " << A1.measure() << "A\n\n";
 ```

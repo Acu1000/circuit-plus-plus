@@ -69,9 +69,8 @@ VectorX MNAEquation::solve()
     IE.block(0, 0, node_count, 1) = I;
     IE.block(node_count, 0, voltage_source_count, 1) = E;
 
-    if (abs(GBCD.determinant()) < 0.001) {      // TODO: find a cleaner way of handling this
-        std::cerr << "ERROR: DETERMINANT IS 0\n";
-        exit(EXIT_FAILURE);
+    if (abs(GBCD.determinant()) < 0.001) {
+        throw std::runtime_error("Unsimulable circuit (MNA matrix determinant is 0)");
     }
 
     solution = GBCD.colPivHouseholderQr().solve(IE);

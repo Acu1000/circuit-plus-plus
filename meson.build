@@ -36,10 +36,10 @@ gtest_dep = dependency('gtest', main: true)
 
 test_exe = executable(
   'circuitsim_tests',
-  'tests/tests.cpp',
+  'tests/resistor_tests.cpp',
   link_with: lib,
   dependencies: gtest_dep,
   include_directories : include_dirs
 )
 
-test('basic_tests', test_exe)
+test('tests', test_exe)

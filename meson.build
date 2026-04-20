@@ -14,6 +14,7 @@ lib = library(
   'src/comps/resistor.cpp',
   'src/comps/dcpower.cpp',
   'src/comps/voltmeter.cpp',
+  'src/comps/ammeter.cpp',
   'src/parts/node.cpp',
   'src/parts/terminal.cpp',
   'src/simulation/simulation.cpp',

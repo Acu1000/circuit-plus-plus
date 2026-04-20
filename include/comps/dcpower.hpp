@@ -4,8 +4,9 @@
 #include<comps/component.hpp>
 
 class DCPower : public Component {
-    private:
+    protected:
     real_t voltage;
+    int voltage_source_id;
 
     public:
     const Terminal& Plus = terminals[0];

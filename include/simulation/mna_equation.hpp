@@ -38,4 +38,5 @@ class MNAEquation {
         VectorX solve();
         VectorX get_last_solution();
         real_t get_node_voltage(int p_node_id);
+        real_t get_voltage_source_current(int p_source_id);
 };

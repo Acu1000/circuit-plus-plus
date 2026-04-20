@@ -83,3 +83,8 @@ real_t MNAEquation::get_node_voltage(int p_node_id)
 {
     return solution[p_node_id];
 }
+
+real_t MNAEquation::get_voltage_source_current(int p_source_id)
+{
+    return solution[node_count + p_source_id];
+}

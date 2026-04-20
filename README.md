@@ -18,7 +18,6 @@ DCPower& v1 = sim.add<DCPower>(V);    // Add DC voltage source v1
 Resistor& r1 = sim.add<Resistor>(R);  // Add resistor r1
 Ammeter& A1 = sim.add<Ammeter>();     // Add ammeter A1
 
-
 // Connect the 3 components in series
 // v1 -- r1 -- A1
 sim.connect(v1.Plus, r1.A);  // Connect v1 to r1

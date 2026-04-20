@@ -18,9 +18,9 @@ DCPower& v1 = sim.add<DCPower>(V);    // Add DC voltage source v1
 Resistor& r1 = sim.add<Resistor>(R);  // Add resistor r1
 Ammeter& A1 = sim.add<Ammeter>();     // Add ammeter A1
 
-// v1 -- r1 -- A1
 
 // Connect the 3 components in series
+// v1 -- r1 -- A1
 sim.connect(v1.Plus, r1.A);  // Connect v1 to r1
 sim.connect(r1.B, A1.Plus);  // Connect r1 to A1
 
@@ -29,4 +29,9 @@ sim.step();   // Run the simulation for a single time step
 
 // We read the current from A1 and realize that I = V / R
 std::cout << "V = " << V << "V,  R = " << R << "Ω,  I = " << A1.measure() << "A\n\n";
+```
+Output:
+```
+# Running: Voltage Divider Demo
+Vsource = 10V,  V1 = 5V,  V2 = 5V
 ```

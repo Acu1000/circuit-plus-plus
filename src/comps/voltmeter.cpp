@@ -13,7 +13,20 @@ real_t Voltmeter::measure()
 
 void Voltmeter::update(Circuit &p_circuit, MNAEquation &p_equation)
 {
-    int plus_node_id = p_circuit.get_terminal_node(Plus.get_id());
-    int minus_node_id = p_circuit.get_terminal_node(Minus.get_id());
-    last_voltage = p_equation.get_node_voltage(plus_node_id) - p_equation.get_node_voltage(minus_node_id);
+    double plus_voltage = 0;
+    double minus_voltage = 0;
+
+    TerminalID plus_terminal_id = Plus.get_id();
+    if (p_circuit.is_terminal_connected(plus_terminal_id)) {
+        int plus_node_id = p_circuit.get_terminal_node(plus_terminal_id);
+        plus_voltage = p_equation.get_node_voltage(plus_node_id);
+    }
+
+    TerminalID minus_terminal_id = Minus.get_id();
+    if (p_circuit.is_terminal_connected(minus_terminal_id)) {
+        int minus_node_id = p_circuit.get_terminal_node(minus_terminal_id);
+        minus_voltage = p_equation.get_node_voltage(minus_node_id);
+    }
+    
+    last_voltage = plus_voltage - minus_voltage;
 }

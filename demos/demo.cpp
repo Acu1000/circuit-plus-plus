@@ -3,6 +3,7 @@
 
 #include<simulation/simulation.hpp>
 #include<comps/resistor.hpp>
+#include<comps/capacitor.hpp>
 #include<comps/dcpower.hpp>
 #include<comps/voltmeter.hpp>
 #include<comps/ammeter.hpp>
@@ -62,28 +63,7 @@ void ohms_law_demo() {
 
 int main() {
 
-    std::cout << "===================\nSTARTING\n===================\n";
-    
-    //voltage_divider_demo();
-    //ohms_law_demo();
+    voltage_divider_demo();
+    ohms_law_demo();
 
-    Simulation sim;
-
-    auto& v1 = sim.add<ACPower>();
-    auto& r1 = sim.add<Resistor>(10);
-    auto& A1 = sim.add<Ammeter>();
-
-    v1.set_sine_wave(100, 10);
-
-    sim.connect(v1.Plus, r1.A);
-    sim.connect(r1.B, A1.Plus);
-
-    sim.set_timestep(1e-3);
-    sim.build();
-
-    for (int i=0; i<1000; i++) {
-        sim.step();
-        std::cout << A1.measure() << "A\n";
-    }
-    
 }

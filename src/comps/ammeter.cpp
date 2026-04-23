@@ -6,9 +6,9 @@ Ammeter::Ammeter(ComponentID p_id) : DCPower(p_id, 0)
 {
 }
 
-void Ammeter::update(Circuit&, MNAEquation &p_equation, real_t)
+void Ammeter::update(ComponentUpdateDto dto)
 {
-    last_current = p_equation.get_voltage_source_current(voltage_source_id);
+    last_current = dto.equation.get_voltage_source_current(voltage_source_id);
 }
 
 real_t Ammeter::measure()

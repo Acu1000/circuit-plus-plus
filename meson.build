@@ -3,7 +3,7 @@ project(
   'cpp',
   version : '0.1',
   meson_version : '>= 1.3.0',
-  default_options : ['warning_level=3', 'cpp_std=c++20'],
+  default_options : ['warning_level=3', 'cpp_std=c++23'],
 )
 
 include_dirs = include_directories('include')
@@ -14,6 +14,7 @@ lib = library(
   'circuitsim',
   'src/comps/component.cpp',
   'src/comps/resistor.cpp',
+  'src/comps/capacitor.cpp',
   'src/comps/dcpower.cpp',
   'src/comps/acpower.cpp',
   'src/comps/voltmeter.cpp',
@@ -29,9 +30,16 @@ lib = library(
 
 demo_exe = executable(
   'circuitsim_demo',
-  'demos/main.cpp',
+  'demos/demo.cpp',
   link_with: lib,
-  install : true,
+  dependencies: eigen_dep,
+  include_directories : include_dirs
+)
+
+work_exe = executable(
+  'circuitsim_work',
+  'demos/work.cpp',
+  link_with: lib,
   dependencies: eigen_dep,
   include_directories : include_dirs
 )
@@ -42,6 +50,8 @@ gtest_dep = dependency('gtest', main: true)
 test_exe = executable(
   'circuitsim_tests',
   'tests/resistor_tests.cpp',
+  'tests/capacitor_tests.cpp',
+  'tests/acpower_tests.cpp',
   link_with: lib,
   dependencies: [gtest_dep, eigen_dep],
   include_directories : include_dirs

@@ -1,4 +1,5 @@
 #include <simulation/simulation.hpp>
+#include <dto/component_update_dto.hpp>
 
 Simulation::Simulation() :
 circuit(std::make_unique<Circuit>())
@@ -17,7 +18,7 @@ void Simulation::set_timestep(real_t p_dt) {
 void Simulation::build() {
     equation = std::make_unique<MNAEquation>(circuit->get_node_count());
     for (auto& comp : circuit->get_components()) {
-        comp->build(*circuit, *equation);
+        comp->build({*circuit, *equation, dt});
     }
     is_built = true;
 }
@@ -25,12 +26,14 @@ void Simulation::build() {
 void Simulation::step()
 {
     if (!is_built) throw std::runtime_error("Attempted to run unbuilt simulation");
-
+    
     VectorX x = equation->solve();
 
     for (auto& comp : circuit->get_components()) {
-        comp->update(*circuit, *equation, dt);
+        comp->update({*circuit, *equation, dt, elapsed_steps});
     }
+    
+    elapsed_steps++;
 
     /*
     int n = equation->get_node_count();
@@ -43,4 +46,18 @@ void Simulation::step()
         std::cout << "Source " << i << " current: " << x[i+n] << "A\n";
     }
     */
+    
+}
+
+void Simulation::run_for_steps(int p_steps)
+{
+    for (int i=0; i<p_steps; i++) {
+        step();
+    }
+}
+
+void Simulation::run_for_time(real_t p_time)
+{
+    int steps = static_cast<int>(p_time / dt);
+    run_for_steps(steps);
 }

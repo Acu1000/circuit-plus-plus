@@ -15,6 +15,8 @@ class Simulation {
 
         real_t dt = 5e-6;
 
+        long elapsed_steps = 0;
+
     public:
         Simulation();
 
@@ -30,4 +32,6 @@ class Simulation {
         void build();
 
         void step();
+        void run_for_steps(int p_steps);
+        void run_for_time(real_t p_time);
 };

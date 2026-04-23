@@ -6,9 +6,10 @@
 
 class ACPower : public Component {
     protected:
-    real_t t_elapsed;
     std::function<real_t(real_t)> func;
     int voltage_source_id;
+
+    real_t last_voltage=0;
 
     public:
     const Terminal& Plus = terminals[0];
@@ -16,6 +17,8 @@ class ACPower : public Component {
 
     ACPower(ComponentID p_id);
     void set_sine_wave(real_t p_amplitude, real_t p_frequency, real_t p_shift=0);
-    void build(Circuit& p_circuit, MNAEquation& p_equation) override;
-    void update(Circuit& p_circuit, MNAEquation& p_equation, real_t dt) override;
+    void build(ComponentBuildDto dto) override;
+    void update(ComponentUpdateDto dto) override;
+
+    real_t get_voltage();
 };

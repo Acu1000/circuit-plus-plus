@@ -12,6 +12,6 @@ class Ammeter : public DCPower {
         const Terminal& Plus = terminals[0];
         const Terminal& Minus = terminals[1];
         Ammeter(ComponentID p_id);
-        void update(Circuit& p_circuit, MNAEquation& p_equation, real_t dt) override;
+        void update(ComponentUpdateDto dto) override;
         real_t measure();
 };

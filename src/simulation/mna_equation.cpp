@@ -9,7 +9,8 @@ MNAEquation::MNAEquation(int p_node_count) :
     D(MatrixX::Zero(0, 0)),
     static_I(VectorX::Zero(p_node_count)),
     dynamic_I(VectorX::Zero(p_node_count)),
-    E(VectorX::Zero(0))
+    E(VectorX::Zero(0)),
+    solution(VectorX::Zero(p_node_count))
 {
 }
 
@@ -40,6 +41,8 @@ int MNAEquation::add_voltage_source()
 
     E.conservativeResize(voltage_source_count);
     E(voltage_source_count-1) = 0;
+
+    solution.conservativeResize(node_count + voltage_source_count);
 
     return voltage_source_count-1;
 }

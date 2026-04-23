@@ -1,2 +1,2 @@
 # build and run
-meson compile -C build && ./build/circuitsim_demo
+meson compile -C build && ./build/circuitsim_work

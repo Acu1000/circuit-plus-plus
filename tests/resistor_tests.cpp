@@ -66,8 +66,3 @@ TEST(ResistorTests, SimpleVoltageDividerWorksProperly) {
     EXPECT_NEAR(V1.measure(), source_voltage * resistance1/(resistance1+resistance2), 0.0001);
     EXPECT_NEAR(V2.measure(), source_voltage * resistance2/(resistance1+resistance2), 0.0001);
 }
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}

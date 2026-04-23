@@ -1,8 +1,9 @@
 # C++ Circuit Simulator (WIP)
-This is a simple c++ library to simulate low-level electronic circuits. Currently it supports DC powered circuits with resistors. 
-Building circuits is done in code and results are printed to the console.
+This is a simple c++ library to simulate low-level electronic circuits. Currently it supports DC powered circuits with resistors. Transient simulation and dynamic elements are currently being worked on
 
-The project is currently work in progress.
+Building circuits is done in code and results are printed to the console
+
+The project is currently work in progress
 
 # Example code
 The following code uses the library to demonstrate [Ohm's law](https://en.wikipedia.org/wiki/Ohm%27s_law) 

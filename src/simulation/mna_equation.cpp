@@ -22,6 +22,12 @@ void MNAEquation::add_static_conductance(int p_node_id1, int p_node_id2, real_t 
     static_G(p_node_id1, p_node_id2) += p_conductance;
 }
 
+void MNAEquation::add_dynamic_conductance(int p_node_id1, int p_node_id2, real_t p_conductance)
+{
+    decomp_update_needed = true;
+    dynamic_G(p_node_id1, p_node_id2) += p_conductance;
+}
+
 int MNAEquation::add_voltage_source()
 {
     voltage_source_count++;
@@ -86,7 +92,11 @@ VectorX MNAEquation::solve()
         throw std::runtime_error("Unsimulable circuit (MNA matrix determinant is 0)");
     }
 
-    solution = GBCD.colPivHouseholderQr().solve(IE);
+    if (decomp_update_needed) {
+        decomp = GBCD.colPivHouseholderQr();
+        decomp_update_needed = false;
+    }
+    solution = decomp.solve(IE);
 
     dynamic_G.setZero();
     dynamic_I.setZero();

@@ -24,6 +24,9 @@ class MNAEquation {
         // Equation solution
         VectorX solution;
 
+        Eigen::ColPivHouseholderQR<MatrixX> decomp;
+        bool decomp_update_needed = true;
+
     public:
         MNAEquation(int p_node_count);
 
@@ -31,6 +34,7 @@ class MNAEquation {
         int get_voltage_source_count();
 
         void add_static_conductance(int p_node_id1, int p_node_id2, real_t p_conductance);
+        void add_dynamic_conductance(int p_node_id1, int p_node_id2, real_t p_conductance);
         void add_dynamic_current(int p_node_id, real_t p_current);
 
         int add_voltage_source();

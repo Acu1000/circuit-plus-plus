@@ -9,14 +9,16 @@
 #include<comps/ammeter.hpp>
 #include<comps/acpower.hpp>
 
+#include<util/units.hpp>
+
 void voltage_divider_demo() {
     std::cout << "# Running: Voltage Divider Demo\n";
     Simulation sim;
 
-    double Vsource = 10;
+    double Vsource = 10_V;
 
-    Resistor& r1 = sim.add<Resistor>(20);
-    Resistor& r2 = sim.add<Resistor>(20);
+    Resistor& r1 = sim.add<Resistor>(20_Ohm);
+    Resistor& r2 = sim.add<Resistor>(20_Ohm);
     DCPower& v1 = sim.add<DCPower>(Vsource);
     Voltmeter& V1 = sim.add<Voltmeter>();
     Voltmeter& V2 = sim.add<Voltmeter>(); 
@@ -41,8 +43,8 @@ void ohms_law_demo() {
     std::cout << "# Running: Ohm's Law Demo\n";
     Simulation sim;
 
-    double V = 10.0;  // Voltage
-    double R = 5.0;   // Resistance
+    double V = 10_V;  // Voltage
+    double R = 5_Ohm;   // Resistance
 
     DCPower& v1 = sim.add<DCPower>(V);    // Add DC voltage source v1
     Resistor& r1 = sim.add<Resistor>(R);  // Add resistor r1
@@ -66,4 +68,5 @@ int main() {
     voltage_divider_demo();
     ohms_law_demo();
 
+    return 0;
 }

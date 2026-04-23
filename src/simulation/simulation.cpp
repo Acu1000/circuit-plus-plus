@@ -12,10 +12,12 @@ void Simulation::connect(const Terminal& p_t1, const Terminal& p_t2) {
 }
 
 void Simulation::set_timestep(real_t p_dt) {
+    if (is_built) throw std::logic_error("Timestep currently can only be set before build"); // TODO: support dynamic timestep
     dt = p_dt;
 }
 
 void Simulation::build() {
+    if (is_built) throw std::logic_error("Attempted to build same simulation twice");
     equation = std::make_unique<MNAEquation>(circuit->get_node_count());
     for (auto& comp : circuit->get_components()) {
         comp->build({*circuit, *equation, dt});
@@ -51,6 +53,7 @@ void Simulation::step()
 
 void Simulation::run_for_steps(int p_steps)
 {
+    if (!is_built) throw std::logic_error("Attempted to run unbuilt simulation");
     for (int i=0; i<p_steps; i++) {
         step();
     }
@@ -58,6 +61,7 @@ void Simulation::run_for_steps(int p_steps)
 
 void Simulation::run_for_time(real_t p_time)
 {
+    if (!is_built) throw std::logic_error("Attempted to run unbuilt simulation");
     int steps = static_cast<int>(p_time / dt);
     run_for_steps(steps);
 }

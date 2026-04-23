@@ -32,6 +32,6 @@ std::cout << "V = " << V << "V,  R = " << R << "Ω,  I = " << A1.measure() << "A
 ```
 Output:
 ```
-# Running: Voltage Divider Demo
-Vsource = 10V,  V1 = 5V,  V2 = 5V
+# Running: Ohm's Law Demo
+V = 10V,  R = 5Ω,  I = 2A
 ```

@@ -7,7 +7,7 @@ circuit(std::make_unique<Circuit>())
 }
 
 void Simulation::connect(const Terminal& p_t1, const Terminal& p_t2) {
-    if (is_built) throw std::runtime_error("Attempted to modify circuit post-build");
+    if (is_built) throw std::logic_error("Attempted to modify circuit post-build");
     circuit->connect(p_t1, p_t2);
 }
 
@@ -25,7 +25,7 @@ void Simulation::build() {
 
 void Simulation::step()
 {
-    if (!is_built) throw std::runtime_error("Attempted to run unbuilt simulation");
+    if (!is_built) throw std::logic_error("Attempted to run unbuilt simulation");
     
     VectorX x = equation->solve();
 

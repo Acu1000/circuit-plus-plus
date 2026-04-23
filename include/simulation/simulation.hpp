@@ -23,7 +23,7 @@ class Simulation {
 
         template<typename TComponent, typename... Args>
         TComponent& add(Args&&... args) requires std::derived_from<TComponent, Component> { 
-            if (is_built) throw std::runtime_error("Attempted to modify circuit post-build");
+            if (is_built) throw std::logic_error("Attempted to modify circuit post-build");
 
             return circuit->add<TComponent>(std::forward<Args>(args)...); 
         }

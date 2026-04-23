@@ -89,7 +89,7 @@ VectorX MNAEquation::solve()
     IE.block(node_count, 0, voltage_source_count, 1) = E;
 
     if (abs(GBCD.determinant()) < 0.001) {
-        throw std::runtime_error("Unsimulable circuit (MNA matrix determinant is 0)");
+        throw std::logic_error("Unsimulable circuit (MNA matrix determinant is 0)");
     }
 
     if (decomp_update_needed) {

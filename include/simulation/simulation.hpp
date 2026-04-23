@@ -5,6 +5,7 @@
 #include<memory>
 #include<simulation/circuit.hpp>
 #include<simulation/mna_equation.hpp>
+#include<type_traits>
 
 class Simulation {
 
@@ -21,9 +22,9 @@ class Simulation {
         Simulation();
 
         template<typename TComponent, typename... Args>
-        TComponent& add(Args&&... args) { 
+        TComponent& add(Args&&... args) requires std::derived_from<TComponent, Component> { 
             if (is_built) throw std::runtime_error("Attempted to modify circuit post-build");
-            
+
             return circuit->add<TComponent>(std::forward<Args>(args)...); 
         }
         void connect(const Terminal& p_t1, const Terminal& p_t2);

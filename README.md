@@ -1,4 +1,4 @@
-# C++ Circuit Simulator (WIP)
+# Circuit++ Circuit Simulator (WIP)
 This is a simple c++ library to simulate low-level electronic circuits. Currently it supports DC powered circuits with resistors. Transient simulation and dynamic elements are currently being worked on
 
 Building circuits is done in code and results are printed to the console

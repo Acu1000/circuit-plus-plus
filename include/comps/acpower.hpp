@@ -16,7 +16,7 @@ class ACPower : public Component {
     const Terminal& Minus = terminals[1];
 
     ACPower(ComponentID p_id);
-    void set_sine_wave(real_t p_amplitude, real_t p_frequency, real_t p_shift=0);
+    ACPower& set_sine_wave(real_t p_amplitude, real_t p_frequency, real_t p_shift=0);
     void build(ComponentBuildDto dto) override;
     void update(ComponentUpdateDto dto) override;
 

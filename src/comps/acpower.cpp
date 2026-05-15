@@ -26,8 +26,9 @@ void ACPower::update(ComponentUpdateDto dto) {
     dto.equation.set_source_voltage(voltage_source_id, last_voltage);
 }
 
-void ACPower::set_sine_wave(real_t p_amplitude, real_t p_frequency, real_t p_shift) {
+ACPower& ACPower::set_sine_wave(real_t p_amplitude, real_t p_frequency, real_t p_shift) {
     func = [=](real_t t){return std::sin(M_PI * 2 * (t * p_frequency + p_shift)) * p_amplitude;};
+    return *this;
 }
 
 real_t ACPower::get_voltage() { return last_voltage; }

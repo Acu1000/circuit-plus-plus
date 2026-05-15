@@ -36,3 +36,15 @@ Output:
 # Running: Ohm's Law Demo
 V = 10V,  R = 5Ω,  I = 2A
 ```
+# Compiling
+> [!WARNING]
+> The below instructions are for Linux. Functionality of the project on Windows & MacOS is not yet known. Feel free to give it a try though and let me know what happened.
+
+Before compilation ensure you have installed the [Eigen](https://libeigen.gitlab.io/) library on your system.
+
+This project uses the [Meson](https://mesonbuild.com/) build system. In order to build the project, ensure you have Meson installed and run the following commands in the project directory:
+```
+meson setup build
+meson compile -C build
+```
+The compiled library, tests and demo executables will appear in the `build` directory.

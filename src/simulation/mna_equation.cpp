@@ -74,19 +74,8 @@ VectorX MNAEquation::solve()
     // |G B| |v|   |I|
     // |C D| |i| = |E|
 
-    MatrixX G = static_G + dynamic_G;
-    VectorX I = static_I + dynamic_I;
-
-    MatrixX GBCD;
-    GBCD.resize(node_count+voltage_source_count, node_count+voltage_source_count);
-    GBCD.block(0, 0, node_count, node_count) = G;
-    GBCD.block(0, node_count, node_count, voltage_source_count) = B;
-    GBCD.block(node_count, 0, voltage_source_count, node_count) = C;
-    GBCD.block(node_count, node_count, voltage_source_count, voltage_source_count) = D;
-
-    VectorX IE(node_count+voltage_source_count);
-    IE.block(0, 0, node_count, 1) = I;
-    IE.block(node_count, 0, voltage_source_count, 1) = E;
+    MatrixX GBCD = compute_gbcd();
+    VectorX IE = compute_ie();
 
     if (abs(GBCD.determinant()) < 0.001) {
         throw std::logic_error("Unsimulable circuit (MNA matrix determinant is 0)");
@@ -112,4 +101,12 @@ real_t MNAEquation::get_node_voltage(int p_node_id)
 real_t MNAEquation::get_voltage_source_current(int p_source_id)
 {
     return solution[node_count + p_source_id];
+}
+
+void MNAEquation::_dump_equation()
+{ 
+    std::cout << "MATRIX A:\n" << compute_gbcd() 
+            << "\n\nVECTOR x:\n" << solution
+            << "\n\nVECTOR b:\n" << compute_ie()
+            << "\n";
 }

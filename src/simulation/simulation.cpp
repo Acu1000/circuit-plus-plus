@@ -65,3 +65,8 @@ void Simulation::run_for_time(real_t p_time)
     int steps = static_cast<int>(p_time / dt);
     run_for_steps(steps);
 }
+
+void Simulation::_dump_equation() 
+{
+    equation->_dump_equation();
+}

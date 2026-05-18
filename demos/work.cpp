@@ -20,17 +20,20 @@ int main() {
     // Low Pass RC Filter
     Simulation sim;
 
-    auto& v1 = sim.add<ACPower>().set_sine_wave(100, 200);
-    auto& r1 = sim.add<Resistor>(200);
-    auto& c1 = sim.add<Capacitor>(1e-5);
+    auto& v1 = sim.add<ACPower>().set_sine_wave(100_V, 200_Hz);
+    auto& r1 = sim.add<Resistor>(200_Ohm);
+    auto& c1 = sim.add<Capacitor>(10_uF);
     auto& out_v = sim.add<Voltmeter>();
 
     sim.connect(v1.Plus, r1.A);
     sim.connect(r1.B, out_v.Plus);
     sim.connect(r1.B, c1.A);
 
-    sim.set_timestep(5e-6);
+    sim.set_timestep(5_us);
     sim.build();
+
+    sim.run_for_time(5.0/200.0 + 1.0/800.0);
+    sim._dump_equation();
 
     double max_v = 0;
     for (int i=0; i<10000; i++) {

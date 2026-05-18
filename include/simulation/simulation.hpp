@@ -35,4 +35,6 @@ class Simulation {
         void step();
         void run_for_steps(int p_steps);
         void run_for_time(real_t p_time);
+
+        void _dump_equation();
 };

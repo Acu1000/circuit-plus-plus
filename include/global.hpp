@@ -11,7 +11,7 @@ typedef int ComponentID;
 typedef int TerminalSubID;
 typedef int NodeID;
 
-typedef std::pair<const ComponentID, const TerminalSubID> TerminalID;
+typedef std::pair<ComponentID, TerminalSubID> TerminalID;
 
 template<>
 struct std::hash<TerminalID>{

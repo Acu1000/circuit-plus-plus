@@ -11,14 +11,9 @@ class Terminal {
 
     TerminalID get_id() const;
 
-    bool operator==(const Terminal& other) const {
-        return id == other.get_id();
-    }
-};
+    Terminal(const Terminal&) = delete;
+    Terminal& operator=(const Terminal&) = delete;
 
-template<>
-struct std::hash<Terminal>{
-    size_t operator()(const Terminal& p) const {
-        return std::hash<TerminalID>{}(p.get_id());
-    }
+    Terminal(Terminal&&) = default;
+    Terminal& operator=(Terminal&&) = default;
 };

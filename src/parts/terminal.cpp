@@ -5,3 +5,4 @@ Terminal::Terminal(ComponentID p_owner_id, TerminalSubID p_sub_id) : id(p_owner_
 }
 
 TerminalID Terminal::get_id() const { return id; }
+
